@@ -7,6 +7,7 @@
 #include "Checking_Account.h"
 #include "Trust_Account.h"
 #include "Account_Util.h"
+#include <memory>
 
 using namespace std; 
 
@@ -15,28 +16,31 @@ int main() {
     cout << fixed;
    
     // Accounts
-    vector<Account *> accounts;
-    accounts.push_back(new Checking_Account());
+    // vector<Account *> accounts;
+    std::vector<std::unique_ptr<Account>> accounts;
+    // accounts.push_back(new Checking_Account());
+    // std::unique_ptr<Account> base_abstract_interface = std::make_unique<Checking_Account>();
+    accounts.push_back(std::make_unique<Checking_Account>());
     display(accounts);
     deposit(accounts, 1000);
     withdraw(accounts,2000);
 
-    // Account *p1 = new Checking_Account("Larry", 10000);
-    // Account *p2 = new Savings_Account("Moe", 1000);
-    // Account *p3 = new Trust_Account("Curly");
+//     // Account *p1 = new Checking_Account("Larry", 10000);
+//     // Account *p2 = new Savings_Account("Moe", 1000);
+//     // Account *p3 = new Trust_Account("Curly");
     
-    // std::vector<Account *> accounts {p1,p2,p3};
+//     // std::vector<Account *> accounts {p1,p2,p3};
     
-    // display(accounts);
-    // deposit(accounts, 1000);
-    // withdraw(accounts, 2000);
+//     // display(accounts);
+//     // deposit(accounts, 1000);
+//     // withdraw(accounts, 2000);
     
     // Savings 
-    vector<Account*> sav_accounts;
-    sav_accounts.push_back(new Savings_Account());
-    sav_accounts.push_back(new Savings_Account("Superman"));
-    sav_accounts.push_back(new Savings_Account("Batman", 2000));
-    sav_accounts.push_back(new Savings_Account("Wonderwoman", 5000, 5.0));
+    std::vector<std::unique_ptr<Account>> sav_accounts;
+    sav_accounts.push_back(std::make_unique<Savings_Account>());
+    sav_accounts.push_back(std::make_unique<Savings_Account>("Superman"));
+    sav_accounts.push_back(std::make_unique<Savings_Account>("Batman", 2000));
+    sav_accounts.push_back(std::make_unique<Savings_Account>("Wonderwoman", 5000, 5.0));
 
     display(sav_accounts);
     deposit(sav_accounts, 1000);
@@ -44,11 +48,11 @@ int main() {
    
    // Checking
    
-    vector<Account*> check_accounts;
-    check_accounts.push_back(new Checking_Account());
-    check_accounts.push_back(new Checking_Account("Kirk"));
-    check_accounts.push_back(new Checking_Account("Spock", 2000));
-    check_accounts.push_back(new Checking_Account("Bones", 5000));
+    std::vector<std::unique_ptr<Account>> check_accounts;
+    check_accounts.push_back(std::make_unique<Checking_Account>());
+    check_accounts.push_back(std::make_unique<Checking_Account>("Kirk"));
+    check_accounts.push_back(std::make_unique<Checking_Account>("Spock", 2000));
+    check_accounts.push_back(std::make_unique<Checking_Account>("Bones", 5000));
 
     display(check_accounts);
     deposit(check_accounts, 1000);
@@ -56,11 +60,11 @@ int main() {
 
     // Trust
   
-    vector<Account*> trust_accounts;
-    trust_accounts.push_back(new Trust_Account());
-    trust_accounts.push_back(new Trust_Account("Athos", 10000, 5.0));
-    trust_accounts.push_back(new Trust_Account("Porthos", 20000, 4.0));
-    trust_accounts.push_back(new Trust_Account("Aramis", 30000));
+    std::vector<std::unique_ptr<Account>> trust_accounts;
+    trust_accounts.push_back(std::make_unique<Trust_Account>());
+    trust_accounts.push_back(std::make_unique<Trust_Account>("Athos", 10000, 5.0));
+    trust_accounts.push_back(std::make_unique<Trust_Account>("Porthos", 20000, 4.0));
+    trust_accounts.push_back(std::make_unique<Trust_Account>("Aramis", 30000));
 
     display(trust_accounts);
     deposit(trust_accounts, 1000);
