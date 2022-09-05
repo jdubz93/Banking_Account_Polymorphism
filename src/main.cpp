@@ -19,21 +19,15 @@ int main() {
     // vector<Account *> accounts;
     std::vector<std::unique_ptr<Account>> accounts;
     // accounts.push_back(new Checking_Account());
-    // std::unique_ptr<Account> base_abstract_interface = std::make_unique<Checking_Account>();
-    accounts.push_back(std::make_unique<Checking_Account>());
+
+
+    // unique_ptr's cannot be copied. Therefore, we use move semantics to avoid attempting to copy the pointer to vector.
+    // now the vector owns ownership of the pointer.
+    std::unique_ptr<Account> base_abstract_interface = std::make_unique<Checking_Account>();
+    accounts.push_back(std::move(base_abstract_interface));
     display(accounts);
     deposit(accounts, 1000);
     withdraw(accounts,2000);
-
-//     // Account *p1 = new Checking_Account("Larry", 10000);
-//     // Account *p2 = new Savings_Account("Moe", 1000);
-//     // Account *p3 = new Trust_Account("Curly");
-    
-//     // std::vector<Account *> accounts {p1,p2,p3};
-    
-//     // display(accounts);
-//     // deposit(accounts, 1000);
-//     // withdraw(accounts, 2000);
     
     // Savings 
     std::vector<std::unique_ptr<Account>> sav_accounts;
